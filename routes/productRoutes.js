@@ -4,15 +4,15 @@ const authController = require('../controllers/authController');
 
 const router = express.Router();
 
-// ─────────────────────────────────────────────
+
 //  ALIAS ROUTES (must be before /:id)
-// ─────────────────────────────────────────────
+
 router.route('/product-category').get(productController.getProductCategory);
 router.route('/top-3-cheap').get(productController.getTopCheapProducts);
 
-// ─────────────────────────────────────────────
+
 //  MAIN CRUD ROUTES
-// ─────────────────────────────────────────────
+
 router
   .route('/')
   .get(authController.protect, productController.getAllProducts)   // protected

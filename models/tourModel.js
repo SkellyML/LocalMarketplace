@@ -100,17 +100,17 @@ const tourSchema = new mongoose.Schema(
   }
 );
 
-// ─────────────────────────────────────────────
+
 //  VIRTUAL PROPERTY: durationWeeks
-// ─────────────────────────────────────────────
+
 tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;
 });
 
-// ─────────────────────────────────────────────
+
 //  DOCUMENT MIDDLEWARE: pre save
-//  Sets slug before document is saved
-// ─────────────────────────────────────────────
+
+
 tourSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
   next();
@@ -120,10 +120,10 @@ tourSchema.post('save', function (doc) {
   console.log('Tour saved:', doc);
 });
 
-// ─────────────────────────────────────────────
+
 //  QUERY MIDDLEWARE
 //  Filters out secretTour = true from all find queries
-// ─────────────────────────────────────────────
+
 tourSchema.pre(/^find/, function (next) {
   this.find({ secretTour: { $ne: true } });
   this.start = Date.now();
@@ -135,10 +135,10 @@ tourSchema.post(/^find/, function (docs, next) {
   next();
 });
 
-// ─────────────────────────────────────────────
+
 //  AGGREGATE MIDDLEWARE
 //  Filters out secretTour = true before aggregation runs
-// ─────────────────────────────────────────────
+
 tourSchema.pre('aggregate', function (next) {
   this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
   next();

@@ -3,7 +3,7 @@ const slugify = require('slugify');
 
 const productSchema = new mongoose.Schema(
   {
-    // ── ORIGINAL FIELDS (unchanged) ──────────────────────────
+    
     name: {
       type: String,
       required: [true, 'A product must have a name'],
@@ -26,7 +26,7 @@ const productSchema = new mongoose.Schema(
       required: [true, 'A product must have a seller'],
     },
 
-    // Step 6 – Built-in Validator: description must not exceed 50 characters
+    // Built-in Validator:
     description: {
       type: String,
       trim: true,
@@ -38,7 +38,7 @@ const productSchema = new mongoose.Schema(
       default: Date.now,
     },
 
-    // ── NEW FIELDS FOR ACTIVITY ───────────────────────────────
+    
 
     // Step 7 – Custom Validator: priceDiscount must be below price
     priceDiscount: {

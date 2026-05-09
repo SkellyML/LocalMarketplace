@@ -2,9 +2,9 @@ const Tour = require('../models/tourModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
-// ─────────────────────────────────────────────
+
 //  POST /api/v1/tours
-// ─────────────────────────────────────────────
+
 exports.createTour = catchAsync(async (req, res, next) => {
   const newTour = await Tour.create(req.body);
   res.status(201).json({
@@ -13,9 +13,9 @@ exports.createTour = catchAsync(async (req, res, next) => {
   });
 });
 
-// ─────────────────────────────────────────────
+
 //  GET /api/v1/tours
-// ─────────────────────────────────────────────
+
 exports.getAllTours = catchAsync(async (req, res, next) => {
   const tours = await Tour.find();
   res.status(200).json({
@@ -25,9 +25,9 @@ exports.getAllTours = catchAsync(async (req, res, next) => {
   });
 });
 
-// ─────────────────────────────────────────────
+
 //  GET /api/v1/tours/:id
-// ─────────────────────────────────────────────
+
 exports.getTour = catchAsync(async (req, res, next) => {
   const tour = await Tour.findById(req.params.id);
   if (!tour) {
@@ -39,9 +39,9 @@ exports.getTour = catchAsync(async (req, res, next) => {
   });
 });
 
-// ─────────────────────────────────────────────
+
 //  PATCH /api/v1/tours/:id
-// ─────────────────────────────────────────────
+
 exports.updateTour = catchAsync(async (req, res, next) => {
   const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -56,9 +56,9 @@ exports.updateTour = catchAsync(async (req, res, next) => {
   });
 });
 
-// ─────────────────────────────────────────────
+
 //  DELETE /api/v1/tours/:id
-// ─────────────────────────────────────────────
+
 exports.deleteTour = catchAsync(async (req, res, next) => {
   const tour = await Tour.findByIdAndDelete(req.params.id);
   if (!tour) {
@@ -70,9 +70,9 @@ exports.deleteTour = catchAsync(async (req, res, next) => {
   });
 });
 
-// ─────────────────────────────────────────────
+
 //  AGGREGATION PIPELINE – GET /api/v1/tours/tour-stats
-// ─────────────────────────────────────────────
+
 exports.getTourStats = catchAsync(async (req, res, next) => {
   const stats = await Tour.aggregate([
     { $match: { ratingsAverage: { $gte: 4.5 } } },
